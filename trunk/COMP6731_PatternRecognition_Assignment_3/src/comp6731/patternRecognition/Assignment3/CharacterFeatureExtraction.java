@@ -75,7 +75,7 @@ public class CharacterFeatureExtraction {
 					lineStart = true;
 					pixelCount++;
 				} else {
-					if (lineStart && pixelCount > 10) {
+					if (lineStart && pixelCount > 5/*10*/) {
 						HorizontalLineCount++;
 					}
 					lineStart = false;

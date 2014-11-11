@@ -66,9 +66,9 @@ public class ImageProcessing {
 
 	private static void readImage() {
 		String directory = "resource/";
-		String image = directory + "4a.png"; // best 4a.png
+		String image = directory + "w4.png"; // best 4a.png
 		String image8 = directory + "8.png"; // best 8.png
-		String imageA = directory + "A.png"; // best a.png
+		String imageA = directory + "A1.png"; // best a.png
 		String imageB = directory + "B1.png"; // best b1.png
 		try {
 			inputImage = ImageIO.read(new File(image));
