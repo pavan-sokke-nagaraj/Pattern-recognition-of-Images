@@ -66,10 +66,10 @@ public class ImageProcessing {
 
 	private static void readImage() {
 		String directory = "resource/";
-		String image = directory + "w4.png"; // best 4a.png
-		String image8 = directory + "8.png"; // best 8.png
-		String imageA = directory + "A1.png"; // best a.png
-		String imageB = directory + "B1.png"; // best b1.png
+		String image4 = directory + "4.png"; // best 4.png Handwritten : 4H.png
+		String image8 = directory + "8H.png"; // best 8.png
+		String image = directory + "A1.png"; // best a.png/a1.png Handwritten
+		String imageB = directory + "B.png"; // best B.png
 		try {
 			inputImage = ImageIO.read(new File(image));
 		} catch (IOException e) {

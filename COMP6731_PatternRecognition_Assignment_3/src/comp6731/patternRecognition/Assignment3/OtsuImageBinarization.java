@@ -28,9 +28,9 @@ public class OtsuImageBinarization {
 				}else{
 					binaryImage[i][j] = 0;
 				}
-				System.out.print(c.getRGB()+" ");
+//				System.out.print(c.getRGB()+" ");
 			}
-			System.out.println();
+//			System.out.println();
 		}
 		return binaryImage;
 	}
