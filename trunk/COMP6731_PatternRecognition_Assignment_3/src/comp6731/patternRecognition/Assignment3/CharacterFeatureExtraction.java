@@ -7,6 +7,8 @@ public class CharacterFeatureExtraction {
 
 	private static final int pixelThresholdH = 5;
 	private static final int pixelThresholdV = 5;
+	private static final int pixelThresholdRightDiag = 5;
+	private static final int pixelThresholdLeftDiag = 5;
 
 	public void extractFeatures(byte[][] inputMatrix) {
 		// Starters: pixels with one neighbour 1 in the character skeleton
@@ -20,6 +22,11 @@ public class CharacterFeatureExtraction {
 		System.out.println("Vertical Line Count :\t " + verticalLineCount);
 		int characterHoleCount = extractCharacterHoles(inputMatrix);
 		System.out.println("Character's Hole Count :\t " + characterHoleCount);
+		int leftDiagLineCount = extractLeftDiagonalLines(inputMatrix);
+		System.out.println("Left Diagonal Line Count :\t " + leftDiagLineCount);
+		int rightDiagLineCount = extractRightDiagonalLines(inputMatrix);
+		System.out.println("Right Diagonal Line Count :\t "
+				+ rightDiagLineCount);
 
 		contourSquareTracing(inputMatrix);
 	}
@@ -114,7 +121,7 @@ public class CharacterFeatureExtraction {
 						j++;
 						interSectionCount++;
 					} else if (neighborCount == 2 && isPerpendicular) {
-						interSectionCount++;
+						// interSectionCount++;
 					}
 				}
 				isLinearPixel = false;
@@ -174,7 +181,7 @@ public class CharacterFeatureExtraction {
 					lineStart = true;
 					pixelCount++;
 				} else {
-					if (lineStart && pixelCount > pixelThresholdV) {
+					if (lineStart && pixelCount >= pixelThresholdV) {
 						verticalLineCount++;
 					}
 					lineStart = false;
@@ -197,7 +204,7 @@ public class CharacterFeatureExtraction {
 					lineStart = true;
 					pixelCount++;
 				} else {
-					if (lineStart && pixelCount > pixelThresholdH)
+					if (lineStart && pixelCount >= pixelThresholdH)
 						horizontalLineCount++;
 					lineStart = false;
 					pixelCount = 0;
@@ -286,6 +293,79 @@ public class CharacterFeatureExtraction {
 			}
 		}
 		return inputMatrix;
+	}
+
+	private int extractLeftDiagonalLines(byte[][] inputMatrix) {
+		int leftDiagLineCount = 0;
+		int rowCount = inputMatrix.length;
+		int columnCount = inputMatrix[0].length;
+		int maximumCount = rowCount + columnCount - 2;
+		int pixelCount = 0;
+		boolean isLinearPixel = false;
+		boolean lineIntercepted = false;
+		for (int k = 0; k <= maximumCount; k++) {
+			for (int i = 0; i < rowCount; i++) {
+				for (int j = 0; j < columnCount; j++) {
+					if (i + j - k == 0) {
+						if (inputMatrix[i][j] == 1) {
+							isLinearPixel = true;
+							pixelCount++;
+						} else {
+							if (lineIntercepted) {
+								i++;
+								j++;
+								lineIntercepted = false;
+								isLinearPixel = false;
+							}
+							if (isLinearPixel
+									&& pixelCount >= pixelThresholdLeftDiag) {
+								leftDiagLineCount++;
+								lineIntercepted = true;
+							}
+							isLinearPixel = false;
+							pixelCount = 0;
+						}
+					}
+				}
+			}
+		}
+		return leftDiagLineCount;
+	}
+
+	private int extractRightDiagonalLines(byte[][] inputMatrix) {
+		int rightDiagLineCount = 0;
+		int rowCount = inputMatrix.length;
+		int columnCount = inputMatrix[0].length;
+		boolean isLinearPixel = false;
+		int maximumCount = rowCount + columnCount - 2;
+		int pixelCount = 0;
+		boolean lineIntercepted = false;
+		for (int sum = maximumCount; sum > 0; sum--) {
+			for (int i = 0; i < rowCount; i++) {
+				for (int j = 0; j < columnCount; j++) {
+					if (i + j - sum == 0) {
+						if (inputMatrix[i][inputMatrix[i].length - j - 1] == 1) {
+							isLinearPixel = true;
+							pixelCount++;
+						} else {
+							if (lineIntercepted) {
+								i++;
+								j++;
+								lineIntercepted = false;
+								isLinearPixel = false;
+							}
+							if (isLinearPixel && pixelCount >= 5) {
+								rightDiagLineCount++;
+								lineIntercepted = true;
+							}
+							isLinearPixel = false;
+							pixelCount = 0;
+						}
+					}
+				}
+			}
+		}
+		return rightDiagLineCount;
 	}
 
 }
