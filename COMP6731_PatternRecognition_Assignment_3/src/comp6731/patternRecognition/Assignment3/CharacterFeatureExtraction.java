@@ -7,26 +7,58 @@ public class CharacterFeatureExtraction {
 
 	private static final int pixelThresholdH = 5;
 	private static final int pixelThresholdV = 5;
-	private static final int pixelThresholdRightDiag = 5;
+	private static final int pixelThresholdRightDiag = 3;
 	private static final int pixelThresholdLeftDiag = 5;
+	private String classifiedImage = "";
 
 	public void extractFeatures(byte[][] inputMatrix) {
+		System.out.println("\n__________EXTRACTED FEATURES__________\n ");
 		// Starters: pixels with one neighbour 1 in the character skeleton
+		
 		int starterPixelCount = extractStarterPixels(inputMatrix);
-		System.out.println("Starter Pixel Count :\t " + starterPixelCount);
+		System.out.println("Starter Pixel Count 	 : " + starterPixelCount);
 		int intersectionCount = extractIntersections(inputMatrix);
-		System.out.println("Intersection Count :\t " + intersectionCount);
+		System.out.println("Intersection Count 	 : " + intersectionCount);
 		int horizontalLineCount = extractHorizontalLines(inputMatrix);
-		System.out.println("Horizontal Line Count :\t " + horizontalLineCount);
+		System.out.println("Horizontal Line Count 	 : " + horizontalLineCount );
 		int verticalLineCount = extractVerticalLines(inputMatrix);
-		System.out.println("Vertical Line Count :\t " + verticalLineCount);
+		System.out.println("Vertical Line Count 	 : " + verticalLineCount);
 		int characterHoleCount = extractCharacterHoles(inputMatrix);
-		System.out.println("Character's Hole Count :\t " + characterHoleCount);
+		System.out.println("Character's Hole Count 	 : " + characterHoleCount);
 		int leftDiagLineCount = extractLeftDiagonalLines(inputMatrix);
-		System.out.println("Left Diagonal Line Count :\t " + leftDiagLineCount);
+		System.out.println("Left Diagonal Line Count : " + leftDiagLineCount);
 		int rightDiagLineCount = extractRightDiagonalLines(inputMatrix);
-		System.out.println("Right Diagonal Line Count :\t "
-				+ rightDiagLineCount);
+		System.out.println("Right Diagonal Line Count: " + rightDiagLineCount);
+		
+		if ((starterPixelCount == 3 || starterPixelCount == 2)
+				&& (intersectionCount == 1 || intersectionCount == 2)
+				&& (horizontalLineCount == 1)
+				&& (verticalLineCount == 1 || verticalLineCount == 2)
+				&& (characterHoleCount <= 1) && (leftDiagLineCount <= 1)
+				&& (rightDiagLineCount == 0)) {
+			classifiedImage = "4";
+		} else if ((starterPixelCount <= 1)
+				&& (intersectionCount == 2 || intersectionCount == 3)
+				&& (horizontalLineCount == 2) && (verticalLineCount <= 3)
+				&& (characterHoleCount == 2) && (leftDiagLineCount == 0)
+				&& (rightDiagLineCount <= 1)) {
+			classifiedImage = "8";
+		} else if ((starterPixelCount == 2) && (intersectionCount == 2)
+				&& (horizontalLineCount == 1) && (verticalLineCount <= 1)
+				&& (characterHoleCount == 1) && (leftDiagLineCount <= 1)
+				&& (rightDiagLineCount <= 1)) {
+			classifiedImage = "A";
+		} else if ((starterPixelCount <= 2)
+				&& (intersectionCount >= 2 || intersectionCount <= 4)
+				&& (horizontalLineCount >= 1 || horizontalLineCount <= 3)
+				&& (verticalLineCount >= 1 || verticalLineCount <= 2)
+				&& (characterHoleCount >= 1 || characterHoleCount <= 2)
+				&& (leftDiagLineCount == 0) && (rightDiagLineCount <= 2)) {
+			classifiedImage = "B";
+		}
+		
+		System.out.println("\n__________IMAGE CLASSIFICATION_________________");
+		System.out.println("\n\tImage is recognized as	: " + classifiedImage);
 
 		contourSquareTracing(inputMatrix);
 	}
@@ -354,7 +386,7 @@ public class CharacterFeatureExtraction {
 								lineIntercepted = false;
 								isLinearPixel = false;
 							}
-							if (isLinearPixel && pixelCount >= 5) {
+							if (isLinearPixel && pixelCount >= pixelThresholdRightDiag ) {
 								rightDiagLineCount++;
 								lineIntercepted = true;
 							}

@@ -1,0 +1,92 @@
+_______________IMAGE INPUT DETAILS _______________
+Input image height:	900
+Input image width:	900
+___________________________________________________
+
+________BINARY IMAGE AFTER SIZE NORMALIZATION ( 30H x 25W ) __________
+
+	 Alpha :	0.03333333507180214
+	 Beta  :	0.02777777798473835
+
+Length and width after size normalization
+Binary Image length:	30
+Binary Image width :	25
+                         
+                         
+                         
+                         
+                         
+           11            
+          111            
+          1111           
+         11 11           
+         11 111          
+        11   11          
+        11    11         
+       11     11         
+      111      11        
+      111111111111       
+     11111111111111      
+     11111111 11111      
+    11           11      
+    11           11      
+   11             11     
+  111             11     
+  11               11    
+                   1     
+                         
+                         
+                         
+                         
+                         
+                         
+                         
+______________________________________________________________________
+______________BINARY IMAGE AFTER ZHANG-SUEN THINNING__________________
+Binary Image length:	30
+Binary Image width :	25
+                         
+                         
+                         
+                         
+                         
+                         
+                         
+          111            
+          1 1            
+         1   1           
+         1    1          
+        1     1          
+        1      1         
+       1       1         
+       1       1         
+      111111111111       
+     1           1       
+     1           1       
+    1             1      
+    1             1      
+   1               1     
+                   1     
+                         
+                         
+                         
+                         
+                         
+                         
+                         
+                         
+______________________________________________________________________
+
+__________EXTRACTED FEATURES__________
+ 
+Starter Pixel Count 	 : 2
+Intersection Count 	 : 2
+Horizontal Line Count 	 : 1
+Vertical Line Count 	 : 0
+Character's Hole Count 	 : 1
+Left Diagonal Line Count : 1
+Right Diagonal Line Count: 1
+
+__________IMAGE CLASSIFICATION_________________
+
+	Image is recognized as	: A
