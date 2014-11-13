@@ -1,0 +1,40 @@
+COMP 6731
+Pattern Recognition
+Assignment 3
+
+Name: Pavan Sokke Nagaraj
+Student Id: #7608144
+Applied Computer Science
+Concordia University
+
+
+Language: Java
+SDK used: Eclipse
+Project Name: COMP6731_PatternRecognition_Assignment_3
+Directories Info:
+
+	src: 
+		package: comp6731.patternRecognition.Assignment3
+		
+		java file: 
+			CharacterFeatureExtraction.java - code to extract character features
+			ImageProcessing.java - main class file to input image, pre process and to write output to console
+			OtsuImageBinarization.java - code to binarize the image
+			Pixel.java - class file with code to  hold co-ordiantes of a pixel in image
+			ZhangSuenThinning- class file with code to skeltonize the image
+
+	documents:
+		Description of assignmnet 
+		folder: Console output of each image after pattern recognition
+		Ouput screenshots: used in document 
+
+resource: BinaryImage_1 - Image 8 in binary values
+	  BinaryImage_2 - Image 9 in binary values
+
+
+Running Imstructions:
+1. Create a project in eclipse by name ' COMP6731_PatternRecognition_Assignment_3 '
+2. Import the project from cd folder: '  COMP6731_PatternRecognition_Assignment_3 '
+3. Run the application 
+4. Change the image name in BinaryImageProcessing.java to get the results of diiferent images.
+5. Results can be visualized in Console.
