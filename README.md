@@ -1,6 +1,3 @@
-# comp6731-patternrecognition-assignment3
-Automatically exported from code.google.com/p/comp6731-patternrecognition-assignment3
-
 # Pattern recognition of Images 
 
 ## Input: Images as standard computer keyboard character or integers. Hand written Images with characters or images
